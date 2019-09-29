@@ -58,14 +58,27 @@ public class lowestCommonAncestorTest {
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.lChild.rChild) == 1);
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.rChild.lChild, theTree.head.rChild.rChild) == 2);
 
-		//LCA is head, nodes are 1 down
+		//LCA is head, nodes are 2 down
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.rChild.rChild) == 0);
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.rChild.lChild) == 0);
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.rChild, theTree.head.rChild.rChild) == 0);
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.rChild, theTree.head.rChild.lChild) == 0);
-
-
+	}
+	
+	@Test
+	public void testLCAAtVariedDepth() {
+		lowestCommonAncestor theLCA = new lowestCommonAncestor();
+		lowestCommonAncestor.binaryTree theTree = theLCA.new binaryTree();
+		theTree.add(0, null, true);
+		theTree.add(1, theTree.head, true);
+		theTree.add(2, theTree.head, false);
+		theTree.add(3, theTree.head.lChild, true);
+		theTree.add(4, theTree.head.lChild, false);
+		theTree.add(5, theTree.head.rChild, true);
+		theTree.add(6, theTree.head.rChild, false);
 		
+		
+		//LCA is head, nodes are depth 1 and 2
 	}
 	
 }

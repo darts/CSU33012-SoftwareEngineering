@@ -16,12 +16,12 @@ public class lowestCommonAncestor {
 		do {
 			route1.add(node1.key);
 			node1 = node1.parent;
-		}while(node1.key != theTree.head.key);
+		}while(node1 != null);
 		
 		do { 
 			route2.add(node2.key);
 			node2 = node2.parent;
-		}while(node2.key != theTree.head.key);
+		}while(node2 != null);
 		
 		for(Integer theNode : route1) {
 			for(Integer searchNode : route2)
@@ -36,11 +36,17 @@ public class lowestCommonAncestor {
 	
 	
 	//the binary tree that we will be traversing
-	class binaryTree {
+	public class binaryTree {
 		treeNode head;
 		
 		binaryTree(){
 			head = null;
+		}
+		
+		public int getKey(treeNode theNode){
+			if(theNode != null)
+				return theNode.key;
+			return -1;
 		}
 		
 		public void add(int key, treeNode parent, boolean isLeft) {

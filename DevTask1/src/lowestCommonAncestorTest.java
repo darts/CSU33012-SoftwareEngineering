@@ -51,12 +51,21 @@ public class lowestCommonAncestorTest {
 		theTree.add(6, theTree.head.rChild, false);
 		
 		
-		//LCA is head
+		//LCA is head, nodes are l&r child
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild, theTree.head.rChild) == 0);
 		
 		//LCA is parent of both nodes
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.lChild.rChild) == 1);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.rChild.lChild, theTree.head.rChild.rChild) == 2);
 
+		//LCA is head, nodes are 1 down
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.rChild.rChild) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.rChild.lChild) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.rChild, theTree.head.rChild.rChild) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.rChild, theTree.head.rChild.lChild) == 0);
+
+
+		
 	}
 	
 }

@@ -81,4 +81,23 @@ public class lowestCommonAncestorTest {
 		//LCA is head, nodes are depth 1 and 2
 	}
 	
+	//check for cases that should not pass
+	@Test
+	public void testInvalid() {
+		lowestCommonAncestor theLCA = new lowestCommonAncestor();
+		lowestCommonAncestor.binaryTree theTree = theLCA.new binaryTree();
+		theTree.add(0, null, true);
+		theTree.add(1, theTree.head, true);
+		theTree.add(2, theTree.head, false);
+		theTree.add(3, theTree.head.lChild, true);
+		theTree.add(4, theTree.head.lChild, false);
+		theTree.add(5, theTree.head.rChild, true);
+		theTree.add(6, theTree.head.rChild, false);
+		
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head, null) == -1);
+		assert(lowestCommonAncestor.getLCA(theTree, null, null) == -1);
+		lowestCommonAncestor.binaryTree.treeNode errNode = theTree.new treeNode(200, null, null, null);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head, errNode) == -1);
+		
+	}
 }

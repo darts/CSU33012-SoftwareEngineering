@@ -8,6 +8,9 @@ public class lowestCommonAncestor {
 
 	//return the key of the LCA of the two nodes 
 	public static int getLCA(binaryTree theTree, binaryTree.treeNode val1, binaryTree.treeNode val2) {
+		if(val1 == null || val2 == null)
+			return -1;
+		
 		ArrayList<Integer> route1 = new ArrayList<>();
 		ArrayList<Integer> route2 = new ArrayList<>();
 		binaryTree.treeNode node1 = val1;
@@ -62,18 +65,18 @@ public class lowestCommonAncestor {
 		}
 		
 		//generate a balanced tree from an array of keys, moves left to right
-		private void genTreeFromArr(int[] keys) {
-			if(keys == null || keys.length <= 0) {
-				System.out.print("ERROR when creating tree, input array invalid");
-				return;
-			}
-			
-			for(int i = 0; i < keys.length; i++) {
-				add(keys[i], null, (i%2 == 0));
-			}
-			
-		}
-		
+//		private void genTreeFromArr(int[] keys) {
+//			if(keys == null || keys.length <= 0) {
+//				System.out.print("ERROR when creating tree, input array invalid");
+//				return;
+//			}
+//			
+//			for(int i = 0; i < keys.length; i++) {
+//				add(keys[i], null, (i%2 == 0));
+//			}
+//			
+//		}
+//		
 		class treeNode {
 			treeNode parent, lChild, rChild;
 			int key;

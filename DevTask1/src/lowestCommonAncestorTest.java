@@ -77,8 +77,12 @@ public class lowestCommonAncestorTest {
 		theTree.add(5, theTree.head.rChild, true);
 		theTree.add(6, theTree.head.rChild, false);
 		
-		
 		//LCA is head, nodes are depth 1 and 2
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild, theTree.head.rChild.rChild) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild, theTree.head.rChild.lChild) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.lChild, theTree.head.rChild) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild.rChild, theTree.head.rChild) == 0);
+		
 	}
 	
 	//check for cases that should not pass

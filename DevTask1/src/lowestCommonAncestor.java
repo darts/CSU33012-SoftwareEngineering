@@ -64,19 +64,6 @@ public class lowestCommonAncestor {
 				parent.rChild = newNode;
 		}
 		
-		//generate a balanced tree from an array of keys, moves left to right
-//		private void genTreeFromArr(int[] keys) {
-//			if(keys == null || keys.length <= 0) {
-//				System.out.print("ERROR when creating tree, input array invalid");
-//				return;
-//			}
-//			
-//			for(int i = 0; i < keys.length; i++) {
-//				add(keys[i], null, (i%2 == 0));
-//			}
-//			
-//		}
-//		
 		class treeNode {
 			treeNode parent, lChild, rChild;
 			int key;

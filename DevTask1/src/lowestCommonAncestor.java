@@ -21,7 +21,7 @@ public class lowestCommonAncestor {
 			node1 = node1.parent;
 		}while(node1 != null);
 		
-		do { 
+		do {
 			route2.add(node2.key);
 			node2 = node2.parent;
 		}while(node2 != null);
@@ -64,7 +64,7 @@ public class lowestCommonAncestor {
 				parent.rChild = newNode;
 		}
 		
-		class treeNode {
+		public class treeNode {
 			treeNode parent, lChild, rChild;
 			int key;
 			treeNode(int key, treeNode parent, treeNode lChild, treeNode rChild){
@@ -72,6 +72,26 @@ public class lowestCommonAncestor {
 				this.parent = parent;
 				this.lChild = lChild;
 				this.rChild = rChild;
+			}
+		}
+	}
+	
+	public class DAG{
+		treeNode head = null;
+		public void addNode(int key, ArrayList<treeNode> parents) {
+			treeNode theNode = new treeNode(key);
+			if(parents != null)
+			for(treeNode parentNode : parents)
+				if(parentNode != null)
+					parentNode.children.add(theNode);
+		}
+		
+		class treeNode{
+			ArrayList<treeNode> children;
+			int key;
+			treeNode(int key){
+				children = new ArrayList<treeNode>();
+				this.key = key;
 			}
 		}
 	}

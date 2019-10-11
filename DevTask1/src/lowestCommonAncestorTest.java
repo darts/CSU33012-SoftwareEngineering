@@ -104,4 +104,21 @@ public class lowestCommonAncestorTest {
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head, errNode) == -1);
 		
 	}
+	
+	//check that nothing bad happens when both nodes are the same
+		@Test
+		public void testSameSame() {
+			lowestCommonAncestor theLCA = new lowestCommonAncestor();
+			lowestCommonAncestor.binaryTree theTree = theLCA.new binaryTree();
+			theTree.add(0, null, true);
+			theTree.add(1, theTree.head, true);
+			theTree.add(2, theTree.head, false);
+			theTree.add(3, theTree.head.lChild, true);
+			theTree.add(4, theTree.head.lChild, false);
+			theTree.add(5, theTree.head.rChild, true);
+			theTree.add(6, theTree.head.rChild, false);
+			assert(lowestCommonAncestor.getLCA(theTree, theTree.head, theTree.head) == 0);
+			assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild, theTree.head.lChild) == 1);
+			assert(lowestCommonAncestor.getLCA(theTree, theTree.head.rChild, theTree.head.rChild) == 2);
+		}
 }

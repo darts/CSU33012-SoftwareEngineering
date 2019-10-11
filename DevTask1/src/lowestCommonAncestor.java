@@ -34,6 +34,7 @@ public class lowestCommonAncestor {
 
 		return -1;
 	}
+	
 
 	// the binary tree that we will be traversing
 	public class binaryTree {
@@ -74,6 +75,41 @@ public class lowestCommonAncestor {
 		}
 	}
 
+	
+	//returns key of the LCA
+	public static int getDAG_LCA(DAG theDAG, int keyA, int keyB) {
+		//2 cases: one of the nodes is LCA || the nodes have a common LCA
+		DAG.treeNode curNode = theDAG.head;
+		
+		int theNodeKey = bothInSubtreeOf(curNode, keyA, keyB);
+		
+		return theNodeKey;
+	}
+	
+	private static int bothInSubtreeOf(DAG.treeNode curNode, int keyA, int keyB) {
+		int curNodeVal = curNode.key;
+		for(int i = 0; i < curNode.children.size(); i++) {
+			int subTreeOf = bothInSubtreeOf(curNode.children.get(i), keyA, keyB);
+			if(subTreeOf >= 0) {
+				return subTreeOf;
+			}else {
+				switch(subTreeOf) {
+				case -1: return -1;
+				case -2: return (curNodeVal == keyB?curNodeVal:-2);
+				case -3: return (curNodeVal == keyA?curNodeVal:-3);
+				}
+			}
+		}
+		if(curNodeVal == keyA)
+			return keyA;
+		if(curNodeVal == keyB)
+			return keyB;
+		
+		return -1;
+	}
+	
+	
+	
 	public class DAG {
 		treeNode head = null;
 

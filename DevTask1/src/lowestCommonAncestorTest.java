@@ -3,6 +3,15 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class lowestCommonAncestorTest {
+	
+	//The tree being used:
+	/*
+	 * 		 0
+	 * 	  /	   \
+	 * 	 1		2
+	 * 	/  \   /  \
+	 * 3	4 5	   6
+	 */
 
 	//sanity check to make sure tree functions work as intended
 	@Test

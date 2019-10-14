@@ -113,14 +113,42 @@ public class lowestCommonAncestor {
 	public class DAG {
 		treeNode head = null;
 
+		//pass a list of parents so parents can update list of children
 		public void addNode(int key, ArrayList<treeNode> parents) {
 			treeNode theNode = new treeNode(key);
+			if(head == null)
+				head = theNode;
 			if (parents != null)
 				for (treeNode parentNode : parents)
 					if (parentNode != null)
 						parentNode.children.add(theNode);
 		}
-
+		
+		public treeNode getNodeWithKey(int key) {
+			if(head != null) {
+				return getNodeRec(key, head);
+			}
+			return null;
+		}
+		
+		private treeNode getNodeRec(int key, treeNode node) {
+			for(treeNode child : node.children) {
+				treeNode theRetNode = getNodeRec(key, child);
+				if(theRetNode != null)
+					return theRetNode;
+			}
+			if(node.key == key)
+				return node;
+			return null;
+		}
+		
+		public String printChildren(treeNode node) {
+			String children = "";
+			for(treeNode child : node.children)
+				children += child.key + "  ";
+			return children;
+		}
+		
 		public int getKey(treeNode node) {
 			if(node != null)
 				return node.key;

@@ -1,5 +1,8 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class lowestCommonAncestorTest {
@@ -103,5 +106,32 @@ public class lowestCommonAncestorTest {
 		lowestCommonAncestor.binaryTree.treeNode errNode = theTree.new treeNode(200, null, null, null);
 		assert(lowestCommonAncestor.getLCA(theTree, theTree.head, errNode) == -1);
 		
+	}
+	
+	
+	
+	//sanity check to make sure the graph works correctly
+	@Test
+	public void testDAG() {
+		/*
+		 * 		 0
+		 * 	  /	   \
+		 * 	 1		2
+		 * 	/  \   /  \
+		 * 3	4 5	   6
+		 * 
+		 */
+		lowestCommonAncestor theLCA = new lowestCommonAncestor();
+		lowestCommonAncestor.DAG theDAG = theLCA.new DAG();
+		theDAG.addNode(0, null);
+		theDAG.addNode(1, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(2, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(3, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1))));
+		theDAG.addNode(4, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1))));
+		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
+		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
+	
+		System.out.print(theDAG.printChildren(theDAG.head));
+		assert(theDAG.printChildren(theDAG.head).equals("1  2  "));
 	}
 }

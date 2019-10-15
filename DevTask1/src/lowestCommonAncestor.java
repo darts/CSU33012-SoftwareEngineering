@@ -116,6 +116,9 @@ public class lowestCommonAncestor {
 		if(foundB)
 			return FOUND_B;
 		
+		if(curNodeVal == keyA && curNodeVal == keyB)
+			return curNodeVal;
+		
 		if(curNodeVal == keyA)
 			return FOUND_A;
 		if(curNodeVal == keyB)

@@ -114,6 +114,8 @@ public class lowestCommonAncestorTest {
 	@Test
 	public void testDAG() {
 		/*
+		 * All vertices point down ie. 0->1 & 0->2 etc.
+		 * 
 		 * 		 0
 		 * 	  /	   \
 		 * 	 1		2
@@ -129,9 +131,44 @@ public class lowestCommonAncestorTest {
 		theDAG.addNode(3, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1))));
 		theDAG.addNode(4, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1))));
 		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
-		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
+		theDAG.addNode(6, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
 	
-		System.out.print(theDAG.printChildren(theDAG.head));
 		assert(theDAG.printChildren(theDAG.head).equals("1  2  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(1)).equals("3  4  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(2)).equals("5  6  "));
+		
+		/*
+		 * 
+		 * 
+		 * 	  0
+		 *  ↙   ↘
+		 * 1	 2
+		 * ↓ ↘  ↙ ↘
+		 * ↓  3 → 4
+		 * ↓ ↙   ↙
+		 * 5   ↙
+		 * ↓ ↙
+		 * 6
+		 * 
+		 */
+		
+		theDAG = theLCA.new DAG();
+		theDAG.addNode(0, null);
+		theDAG.addNode(1, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(2, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(3, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1),theDAG.getNodeWithKey(2))));
+		theDAG.addNode(4, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(3),theDAG.getNodeWithKey(2))));
+		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(3),theDAG.getNodeWithKey(1))));
+		theDAG.addNode(6, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(4),theDAG.getNodeWithKey(5))));
+
+		assert(theDAG.printChildren(theDAG.head).equals("1  2  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(1)).equals("3  5  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(2)).equals("3  4  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(3)).equals("4  5  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(4)).equals("6  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(5)).equals("6  "));
+		assert(theDAG.printChildren(theDAG.getNodeWithKey(6)).equals(""));
 	}
+	
+	
 }

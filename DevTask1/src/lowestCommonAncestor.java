@@ -88,18 +88,26 @@ public class lowestCommonAncestor {
 	
 	private static int bothInSubtreeOf(DAG.treeNode curNode, int keyA, int keyB) {
 		int curNodeVal = curNode.key;
+		boolean foundA = false;
+		boolean foundB = false;
 		for(int i = 0; i < curNode.children.size(); i++) {
 			int subTreeOf = bothInSubtreeOf(curNode.children.get(i), keyA, keyB);
 			if(subTreeOf >= 0) {
 				return subTreeOf;
 			}else {
-				switch(subTreeOf) {
-				case -1: return -1;
-				case -2: return (curNodeVal == keyB?curNodeVal:-2);
-				case -3: return (curNodeVal == keyA?curNodeVal:-3);
+				if(subTreeOf == keyB)
+					foundB = true;
+				if(subTreeOf == keyA)
+					foundA = true;
 				}
 			}
-		}
+		if(foundA && foundB)
+			return curNodeVal;
+		if(foundA && curNodeVal == keyB)
+			return curNodeVal;
+		if(foundB && curNodeVal == keyA)
+			return curNodeVal;
+		
 		if(curNodeVal == keyA)
 			return keyA;
 		if(curNodeVal == keyB)
@@ -149,11 +157,11 @@ public class lowestCommonAncestor {
 			return children;
 		}
 		
-		public int getKey(treeNode node) {
-			if(node != null)
-				return node.key;
-			return -1;
-		}
+//		public int getKey(treeNode node) {
+//			if(node != null)
+//				return node.key;
+//			return -1;
+//		}
 		
 		public ArrayList<treeNode> getChildren(treeNode node) {
 			if(node != null)
@@ -162,8 +170,8 @@ public class lowestCommonAncestor {
 		}
 		
 		class treeNode {
-			private ArrayList<treeNode> children;
-			private int key;
+			public ArrayList<treeNode> children;
+			public int key;
 
 			treeNode(int key) {
 				children = new ArrayList<treeNode>();

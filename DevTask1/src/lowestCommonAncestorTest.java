@@ -117,9 +117,9 @@ public class lowestCommonAncestorTest {
 		 * All vertices point down ie. 0->1 & 0->2 etc.
 		 * 
 		 * 		 0
-		 * 	  /	   \
-		 * 	 1		2
-		 * 	/  \   /  \
+		 * 	   ↙   ↘
+		 * 	  1		 2
+		 * 	↙  ↘   ↙  ↘
 		 * 3	4 5	   6
 		 * 
 		 */

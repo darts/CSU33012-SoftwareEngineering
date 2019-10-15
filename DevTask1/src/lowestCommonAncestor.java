@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public class lowestCommonAncestor {
 
+	public static final int FOUND_A = -2;
+	public static final int FOUND_B = -3;
+	
 	public lowestCommonAncestor() {
 
 	}
@@ -95,9 +98,9 @@ public class lowestCommonAncestor {
 			if(subTreeOf >= 0) {
 				return subTreeOf;
 			}else {
-				if(subTreeOf == -3)
+				if(subTreeOf == FOUND_B)
 					foundB = true;
-				if(subTreeOf == -2)
+				if(subTreeOf == FOUND_A)
 					foundA = true;
 				}
 			}
@@ -109,14 +112,14 @@ public class lowestCommonAncestor {
 			return curNodeVal;
 		
 		if(foundA)
-			return -2;
+			return FOUND_A;
 		if(foundB)
-			return -3;
+			return FOUND_B;
 		
 		if(curNodeVal == keyA)
-			return -2;
+			return FOUND_A;
 		if(curNodeVal == keyB)
-			return -3;
+			return FOUND_B;
 		
 		return -1;
 	}

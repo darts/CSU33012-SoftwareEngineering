@@ -6,6 +6,15 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class lowestCommonAncestorTest {
+	
+	//The tree being used:
+	/*
+	 * 		 0
+	 * 	  /	   \
+	 * 	 1		2
+	 * 	/  \   /  \
+	 * 3	4 5	   6
+	 */
 
 	//sanity check to make sure tree functions work as intended
 	@Test
@@ -108,6 +117,22 @@ public class lowestCommonAncestorTest {
 		
 	}
 	
+	//check that nothing bad happens when both nodes are the same
+	@Test
+	public void testSameSame() {
+		lowestCommonAncestor theLCA = new lowestCommonAncestor();
+		lowestCommonAncestor.binaryTree theTree = theLCA.new binaryTree();
+		theTree.add(0, null, true);
+		theTree.add(1, theTree.head, true);
+		theTree.add(2, theTree.head, false);
+		theTree.add(3, theTree.head.lChild, true);
+		theTree.add(4, theTree.head.lChild, false);
+		theTree.add(5, theTree.head.rChild, true);
+		theTree.add(6, theTree.head.rChild, false);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head, theTree.head) == 0);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.lChild, theTree.head.lChild) == 1);
+		assert(lowestCommonAncestor.getLCA(theTree, theTree.head.rChild, theTree.head.rChild) == 2);
+	}
 	
 	
 	//sanity check to make sure the graph works correctly
@@ -290,4 +315,5 @@ public class lowestCommonAncestorTest {
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 2, lowestCommonAncestor.FOUND_B) == -1);
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, lowestCommonAncestor.FOUND_B, lowestCommonAncestor.FOUND_A) == -1);
 	}
+	
 }

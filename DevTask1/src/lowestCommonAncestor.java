@@ -95,9 +95,9 @@ public class lowestCommonAncestor {
 			if(subTreeOf >= 0) {
 				return subTreeOf;
 			}else {
-				if(subTreeOf == keyB)
+				if(subTreeOf == -3)
 					foundB = true;
-				if(subTreeOf == keyA)
+				if(subTreeOf == -2)
 					foundA = true;
 				}
 			}
@@ -109,9 +109,9 @@ public class lowestCommonAncestor {
 			return curNodeVal;
 		
 		if(curNodeVal == keyA)
-			return keyA;
+			return -2;
 		if(curNodeVal == keyB)
-			return keyB;
+			return -3;
 		
 		return -1;
 	}

@@ -85,7 +85,8 @@ public class lowestCommonAncestor {
 		DAG.treeNode curNode = theDAG.head;
 		
 		int theNodeKey = bothInSubtreeOf(curNode, keyA, keyB);
-		
+		if(theNodeKey < 0)
+			return -1;
 		return theNodeKey;
 	}
 	

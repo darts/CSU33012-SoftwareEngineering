@@ -169,6 +169,14 @@ public class lowestCommonAncestorTest {
 	//test on normal binary tree
 	@Test
 	public void testDAG_LCAonBinaryTree() {
+		/* 
+		 * 		 0
+		 * 	   ↙   ↘
+		 * 	  1		 2
+		 * 	↙  ↘   ↙  ↘
+		 * 3	4 5	   6
+		 * 
+		 */
 		lowestCommonAncestor theLCA = new lowestCommonAncestor();
 		lowestCommonAncestor.DAG theDAG = theLCA.new DAG();
 		theDAG.addNode(0, null);
@@ -242,10 +250,44 @@ public class lowestCommonAncestorTest {
 		theDAG.addNode(6, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(4),theDAG.getNodeWithKey(5))));
 		
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 0, 0) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 0, 4) == 0);
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 1, 2) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 3, 4) == 2);
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 3, 5) == 3);
-		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 5, 6) == 5);
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 4, 5) == 2);
-		
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 5, 6) == 5);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 6, 3) == 3);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 6, 4) == 4);
+	}
+	
+	//test error cases, things that should not return real data
+	@Test
+	public void testErrDAG_LCA() {
+		/*
+		 * 	  0
+		 *  ↙   ↘
+		 * 1	 2
+		 * ↓ ↘  ↙ ↘
+		 * ↓  3   4
+		 * ↓ ↙   ↙
+		 * 5   ↙
+		 * ↓ ↙
+		 * 6
+		 * 
+		 */
+		lowestCommonAncestor theLCA = new lowestCommonAncestor();
+		lowestCommonAncestor.DAG theDAG = theLCA.new DAG();
+		theDAG.addNode(0, null);
+		theDAG.addNode(1, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(2, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(3, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1),theDAG.getNodeWithKey(2))));
+		theDAG.addNode(4, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
+		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(3),theDAG.getNodeWithKey(1))));
+		theDAG.addNode(6, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(4),theDAG.getNodeWithKey(5))));
+	
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 0, -1) == -1);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 2, lowestCommonAncestor.FOUND_A) == -1);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 2, lowestCommonAncestor.FOUND_B) == -1);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, lowestCommonAncestor.FOUND_B, lowestCommonAncestor.FOUND_A) == -1);
 	}
 }

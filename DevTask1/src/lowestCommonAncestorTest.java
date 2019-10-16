@@ -9,11 +9,11 @@ public class lowestCommonAncestorTest {
 	
 	//The tree being used:
 	/*
-	 * 		 0
-	 * 	  /	   \
-	 * 	 1		2
-	 * 	/  \   /  \
-	 * 3	4 5	   6
+	 * 	 0
+	 *     /   \
+	 *    1	    2
+	 *  /  \   /  \
+	 * 3	4 5    6
 	 */
 
 	//sanity check to make sure tree functions work as intended
@@ -139,11 +139,11 @@ public class lowestCommonAncestorTest {
 	@Test
 	public void testDAG() {
 		/* 
-		 * 		 0
-		 * 	   ↙   ↘
-		 * 	  1		 2
-		 * 	↙  ↘   ↙  ↘
-		 * 3	4 5	   6
+		 * 	 0
+		 *     ↙   ↘
+		 *    1	    2
+		 *  ↙  ↘   ↙  ↘
+		 * 3	4 5    6
 		 * 
 		 */
 		lowestCommonAncestor theLCA = new lowestCommonAncestor();
@@ -161,7 +161,7 @@ public class lowestCommonAncestorTest {
 		assert(theDAG.printChildren(theDAG.getNodeWithKey(2)).equals("5  6  "));
 		
 		/*
-		 * 	  0
+		 *    0
 		 *  ↙   ↘
 		 * 1	 2
 		 * ↓ ↘  ↙ ↘
@@ -195,11 +195,11 @@ public class lowestCommonAncestorTest {
 	@Test
 	public void testDAG_LCAonBinaryTree() {
 		/* 
-		 * 		 0
-		 * 	   ↙   ↘
-		 * 	  1		 2
-		 * 	↙  ↘   ↙  ↘
-		 * 3	4 5	   6
+		 * 	 0
+		 *     ↙   ↘
+		 *    1	    2
+		 *  ↙  ↘   ↙  ↘
+		 * 3	4 5    6
 		 * 
 		 */
 		lowestCommonAncestor theLCA = new lowestCommonAncestor();
@@ -226,7 +226,7 @@ public class lowestCommonAncestorTest {
 	@Test
 	public void testDAG_LCAonDAG() {
 		/*
-		 * 	  0
+		 *    0
 		 *  ↙   ↘
 		 * 1	 2
 		 * ↓ ↘  ↙ ↘
@@ -254,7 +254,7 @@ public class lowestCommonAncestorTest {
 		
 		
 		/*
-		 * 	  0
+		 *    0
 		 *  ↙   ↘
 		 * 1	 2
 		 * ↓ ↘  ↙ ↘
@@ -289,7 +289,7 @@ public class lowestCommonAncestorTest {
 	@Test
 	public void testErrDAG_LCA() {
 		/*
-		 * 	  0
+		 *    0
 		 *  ↙   ↘
 		 * 1	 2
 		 * ↓ ↘  ↙ ↘

@@ -90,6 +90,7 @@ public class lowestCommonAncestor {
 		return theNodeKey;
 	}
 	
+	//recursive function that traverses the tree and find the LCA
 	private static int bothInSubtreeOf(DAG.treeNode curNode, int keyA, int keyB) {
 		int curNodeVal = curNode.key;
 		boolean foundA = false;
@@ -105,24 +106,15 @@ public class lowestCommonAncestor {
 					foundA = true;
 				}
 			}
-		if(foundA && foundB)
+		if((foundA && (foundB || curNodeVal == keyB)) || (foundB && curNodeVal == keyA))
 			return curNodeVal;
-		if(foundA && curNodeVal == keyB)
-			return curNodeVal;
-		if(foundB && curNodeVal == keyA)
-			return curNodeVal;
-		
-		if(foundA)
-			return FOUND_A;
-		if(foundB)
-			return FOUND_B;
 		
 		if(curNodeVal == keyA && curNodeVal == keyB)
 			return curNodeVal;
 		
-		if(curNodeVal == keyA)
+		if(foundA || curNodeVal == keyA)
 			return FOUND_A;
-		if(curNodeVal == keyB)
+		if(foundB || curNodeVal == keyB)
 			return FOUND_B;
 		
 		return -1;
@@ -144,6 +136,7 @@ public class lowestCommonAncestor {
 						parentNode.children.add(theNode);
 		}
 		
+		//given a key, tries to find the node in the tree
 		public treeNode getNodeWithKey(int key) {
 			if(head != null) {
 				return getNodeRec(key, head);
@@ -151,6 +144,7 @@ public class lowestCommonAncestor {
 			return null;
 		}
 		
+		//looks for a node in the tree, if not found returns null
 		private treeNode getNodeRec(int key, treeNode node) {
 			for(treeNode child : node.children) {
 				treeNode theRetNode = getNodeRec(key, child);
@@ -162,6 +156,7 @@ public class lowestCommonAncestor {
 			return null;
 		}
 		
+		//returns all of a given node's children's keys in plaintext
 		public String printChildren(treeNode node) {
 			String children = "";
 			for(treeNode child : node.children)
@@ -169,12 +164,7 @@ public class lowestCommonAncestor {
 			return children;
 		}
 		
-//		public int getKey(treeNode node) {
-//			if(node != null)
-//				return node.key;
-//			return -1;
-//		}
-		
+		//returns all of a given node's children
 		public ArrayList<treeNode> getChildren(treeNode node) {
 			if(node != null)
 				return node.children;

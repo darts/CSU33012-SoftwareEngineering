@@ -316,4 +316,64 @@ public class lowestCommonAncestorTest {
 		assert(lowestCommonAncestor.getDAG_LCA(theDAG, lowestCommonAncestor.FOUND_B, lowestCommonAncestor.FOUND_A) == -1);
 	}
 	
+	//test with a larger graph
+	@Test 
+	public void testDAG_LCAtheBigGraph() {
+		/*
+		 *       0
+		 *    ↙ ↓   ↘
+		 *  ↙   ↓     ↘
+		 * 1    2      3
+		 * ↓   ↙ ↘    ↙ ↘
+		 * 4  5   6  7   8
+		 * ↓  ↓   ↓ ↙     ↓
+		 * 9  10  11      12
+		 * ↓  ↓   ↓ ↘    ↙ ↘
+		 * 13 ↓   14 15 16 17 
+		 * ↓ ↙    ↓  ↙   ↘ ↙
+		 * 18     19      20
+		 * ↓      ↓       ↓
+		 * ↳ → → →21← ← ← ↲
+		 */
+		lowestCommonAncestor theLCA = new lowestCommonAncestor();
+		lowestCommonAncestor.DAG theDAG = theLCA.new DAG();
+		theDAG.addNode(0, null);
+		theDAG.addNode(1, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(2, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(3, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.head)));
+		theDAG.addNode(4, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(1))));
+		theDAG.addNode(5, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
+		theDAG.addNode(6, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(2))));
+		theDAG.addNode(7, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(3))));
+		theDAG.addNode(8, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(3))));
+		theDAG.addNode(9, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(4))));
+		theDAG.addNode(10, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(5))));
+		theDAG.addNode(11, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(6),theDAG.getNodeWithKey(7))));
+		theDAG.addNode(12, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(8))));
+		theDAG.addNode(13, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(9))));
+		theDAG.addNode(14, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(11))));
+		theDAG.addNode(15, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(11))));
+		theDAG.addNode(16, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(12))));
+		theDAG.addNode(17, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(12))));
+		theDAG.addNode(18, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(13),theDAG.getNodeWithKey(10))));
+		theDAG.addNode(19, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(14),theDAG.getNodeWithKey(15))));
+		theDAG.addNode(20, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(16),theDAG.getNodeWithKey(17))));
+		theDAG.addNode(21, new ArrayList<lowestCommonAncestor.DAG.treeNode>(Arrays.asList(theDAG.getNodeWithKey(18),theDAG.getNodeWithKey(19),theDAG.getNodeWithKey(20))));
+
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 1, 2) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 1, 0) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 4, 6) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 13,15) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 18, 8) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 18, 19) == 2);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 21, 7) == 7);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 6, 10) == 2);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 10, 11) == 2);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 17, 16) == 12);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 16, 10) == 0);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 19, 20) == 3);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 21, 4) == 4);
+		assert(lowestCommonAncestor.getDAG_LCA(theDAG, 20, 21) == 20);
+	}
+	
 }
